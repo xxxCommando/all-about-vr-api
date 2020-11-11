@@ -28,6 +28,6 @@ export default class Controller {
       loggedMiddleware,
     );
     // Games routes
-    this.app.route('/games').post((req, res) => GameService.getGames(req, res));
+    this.app.route('/games').get((req, res) => GameService.getGames(req, res));
   }
 }
