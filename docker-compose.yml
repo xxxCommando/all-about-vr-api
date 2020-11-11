@@ -9,6 +9,8 @@ services:
       - 3000:3000
     links:
       - mongodb
+    volumes:
+      - .:/app
   mongodb:
     image: mongo:latest
     ports:
