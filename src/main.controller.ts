@@ -29,5 +29,8 @@ export default class Controller {
     );
     // Games routes
     this.app.route('/games').get((req, res) => GameService.getGames(req, res));
+
+    // Headsets Routes
+    this.app.route('/headsets').get((req, res) => HeadsetService.getHeadsets(req, res));
   }
 }
