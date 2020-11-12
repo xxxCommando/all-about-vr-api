@@ -1,8 +1,65 @@
 import { Document } from 'mongoose';
 
 export interface IHeadset extends Document {
-  login: string;
-  password: string;
-  dateOfEntry?: Date;
-  lastUpdated?: Date;
+  id: {
+    type: String,
+    unique: true,
+  },
+  index: Number,
+  name: String,
+  audience: Number,
+  audio: Boolean,
+  brand: String,
+  controller: String,
+  description: String,
+  eyetracking: Boolean,
+  facialrecognition: Boolean,
+  flipup: Boolean,
+  fov: Number,
+  handtracking: Boolean,
+  img: String,
+  imgs: [String],
+  ipd: Boolean,
+  mic: Boolean,
+  pixeldensity: Number,
+  platform: [String],
+  price: Number,
+  refreshrate: String,
+  releasedate: Date,
+  requirements: {
+    os: [String],
+    cpu: String,
+    gpu: String,
+    ram: Number,
+    usb: String,
+    video: String,
+  },
+  resolution: {
+    x: Number,
+    y: Number,
+  },
+  screentype: String,
+  standalone: Boolean,
+  standalonespecs: {
+    cpu: String,
+    gpu: String,
+    ram: Number,
+    storages: [Number],
+    expandable: Boolean,
+    batterylife: Number,
+    link: Boolean,
+  },
+  status: Number,
+  summary: String,
+  think: String,
+  tracking: String,
+  weight: Number,
+  wireless: Boolean,
+  pushedContents: [
+    {
+      text: String,
+      img: String,
+      right: Boolean,
+    }
+  ],
 }
