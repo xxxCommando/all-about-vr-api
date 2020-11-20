@@ -18,11 +18,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: shimataro/ssh-key-action@v2.1.0
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-
       - uses: actions/checkout@v2
 
       - name: Run tests
@@ -41,11 +36,6 @@ jobs:
     if: github.event_name == 'push'
 
     steps:
-      - uses: shimataro/ssh-key-action@v2.1.0
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-
       - uses: actions/checkout@v2
 
       - name: Build image

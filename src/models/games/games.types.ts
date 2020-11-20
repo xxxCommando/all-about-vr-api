@@ -1,8 +1,10 @@
 import { Document } from 'mongoose';
 
 export interface IGame extends Document {
-  login: string;
-  password: string;
-  dateOfEntry?: Date;
-  lastUpdated?: Date;
+  index: Number,
+  name: String,
+  steam: String,
+  summary: String,
+  type: Number,
+  platform: [Number],
 }
