@@ -1,0 +1,77 @@
+name: Docker
+
+on:
+  push:
+    # Publish `1.2.3` tags as releases.
+    tags:
+      - '*.*.*'
+
+  # Run tests for any PRs.
+  pull_request:
+
+env:
+  IMAGE_NAME: all-about-vr-api
+  NODE_ENV: production
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: shimataro/ssh-key-action@v2.1.0
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - uses: actions/checkout@v2
+
+      - name: Run tests
+        run: |
+          if [ -f docker-compose.test.yml ]; then
+            docker-compose --file docker-compose.test.yml build
+            docker-compose --file docker-compose.test.yml run sut
+          else
+            docker build --file Dockerfile .
+          fi
+
+  push:
+    needs: test
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: shimataro/ssh-key-action@v2.1.0
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build . --file Dockerfile.prod
+          --tag $IMAGE_NAME
+
+      - name: Log into GitHub Container Registry
+        run: echo "${{ secrets.CR_PAT }}" | docker login -u bleuh --password-stdin
+
+      - name: Push image to GitHub Container Registry
+        run: |
+          IMAGE_ID=${{ github.repository_owner }}/$IMAGE_NAME
+
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+
+          # Strip git ref prefix from version
+          VERSION=${GITHUB_REF#refs/*/}
+
+          # Logs
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+
+          # Tags
+          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker tag $IMAGE_NAME $IMAGE_ID:latest
+
+          # Push
+          docker push $IMAGE_ID
