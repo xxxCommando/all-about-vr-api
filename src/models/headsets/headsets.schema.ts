@@ -24,7 +24,7 @@ const HeadsetSchema = new Schema({
   pixeldensity: Number,
   platform: [String],
   price: Number,
-  refreshrate: String,
+  refreshrate: Number,
   releasedate: Date,
   requirements: {
     os: [String],
