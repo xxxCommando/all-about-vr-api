@@ -1,15 +1,11 @@
 import { Schema } from 'mongoose';
 
 const GameSchema = new Schema({
-  login: String,
-  password: String,
-  dateOfEntry: {
-    type: Date,
-    default: new Date(),
-  },
-  lastUpdated: {
-    type: Date,
-    default: new Date(),
-  },
+  index: Number,
+  name: String,
+  steam: String,
+  summary: String,
+  type: Number,
+  platform: [Number],
 });
 export default GameSchema;
