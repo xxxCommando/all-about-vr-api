@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 
 const GameSchema = new Schema({
-  index: String,
+  index: Number,
   name: String,
   steam: String,
   summary: String,
