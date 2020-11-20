@@ -1,12 +1,12 @@
 {
   "name": "api-typescript-boilerplate",
-  "version": "0.0.0",
+  "version": "0.2.1",
   "description": "API boilerplate in Typescript.",
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node ./dist/server.js\"",
     "start": "nodemon",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
-    "test": "jest",
+    "test": "jest; node .github/setup.js",
     "coverage": "jest --coverage"
   },
   "repository": {
