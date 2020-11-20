@@ -28,6 +28,9 @@ export default class Controller {
       loggedMiddleware,
     );
     // Games routes
-    this.app.route('/games').post((req, res) => GameService.getGames(req, res));
+    this.app.route('/games').get((req, res) => GameService.getGames(req, res));
+
+    // Headsets Routes
+    this.app.route('/headsets').get((req, res) => HeadsetService.getHeadsets(req, res));
   }
 }
