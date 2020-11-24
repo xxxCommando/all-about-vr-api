@@ -32,5 +32,8 @@ export default class Controller {
 
     // Headsets Routes
     this.app.route('/headsets').get((req, res) => HeadsetService.getHeadsets(req, res));
+
+    // Headsets Brands Routes
+    this.app.route('/headsets/brands').get((req, res) => HeadsetService.getHeadsetsBrands(req, res));
   }
 }
