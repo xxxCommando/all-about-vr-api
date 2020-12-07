@@ -1,10 +1,21 @@
 import { Document } from 'mongoose';
 
+export enum BRANDS {
+  Oculus,
+  HTC,
+  Valve,
+  HP,
+  Pimax,
+  Playstation,
+  VRgineers,
+  StarVR,
+}
+
 export interface IHeadset extends Document {
   id: {
     type: String,
     unique: true,
-  },
+  };
   index: Number,
   name: String,
   audience: Number,
@@ -33,11 +44,11 @@ export interface IHeadset extends Document {
     ram: Number,
     usb: String,
     video: String,
-  },
+  };
   resolution: {
     x: Number,
     y: Number,
-  },
+  };
   screentype: String,
   standalone: Boolean,
   standalonespecs: {
@@ -48,7 +59,7 @@ export interface IHeadset extends Document {
     expandable: Boolean,
     batterylife: Number,
     link: Boolean,
-  },
+  };
   status: Number,
   summary: String,
   think: String,
@@ -60,6 +71,6 @@ export interface IHeadset extends Document {
       text: String,
       img: String,
       right: Boolean,
-    }
-  ],
+    },
+  ];
 }
