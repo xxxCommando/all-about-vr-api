@@ -18,6 +18,19 @@ services:
     restart: unless-stopped
     volumes:
       - data:/data/db
+  mongo-admin:
+    image: mrvautin/adminmongo
+    restart: unless-stopped
+    ports:
+      - 3020:1234
+    environment:
+      HOST: 0.0.0.0
+      CONN_NAME: mongo_conn
+      DB_HOST: mongodb
+      DB_NAME: data
+      DB_PORT: 27017
+    depends_on:
+      - mongodb
 
 volumes:
   data:
