@@ -25,7 +25,10 @@ const HeadsetSchema = new Schema({
   platform: [String],
   price: Number,
   refreshrate: Number,
-  releasedate: Date,
+  releasedate: {
+    seconds: Number,
+    nanoseconds: Number,
+  },
   requirements: {
     os: [String],
     cpu: String,
